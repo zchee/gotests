@@ -8,8 +8,8 @@ import (
 	"io/ioutil"
 	"os"
 
-	"github.com/cweill/gotests/internal/models"
-	"github.com/cweill/gotests/internal/render"
+	"github.com/zchee/gotests/internal/models"
+	"github.com/zchee/gotests/internal/render"
 	"golang.org/x/tools/imports"
 )
 

@@ -7,9 +7,9 @@ import (
 	"path"
 	"text/template"
 
-	"github.com/cweill/gotests/internal/models"
-	"github.com/cweill/gotests/internal/render/bindata"
-	"github.com/cweill/gotests/templates"
+	"github.com/zchee/gotests/internal/models"
+	"github.com/zchee/gotests/internal/render/bindata"
+	"github.com/zchee/gotests/templates"
 )
 
 type Render struct {
