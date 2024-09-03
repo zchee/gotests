@@ -4,7 +4,7 @@
 package {{.Package}}
 
 import (
-{{range .Imports}}{{.Name}} {{.Path}}
+{{range .Imports}}{{.Name}} {{.Path}}{{.Comments}}
 {{end}}
 )
 {{end}}

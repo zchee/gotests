@@ -148,8 +148,9 @@ func (f *Function) IsNaked() bool {
 }
 
 type Import struct {
-	Name string
-	Path string
+	Comments string
+	Name     string
+	Path     string
 }
 
 type Header struct {

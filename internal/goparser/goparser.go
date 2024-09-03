@@ -205,9 +205,17 @@ func parseImports(imps []*ast.ImportSpec) []*models.Import {
 		if imp.Name != nil {
 			n = imp.Name.String()
 		}
+
+		var comments []string
+		if imp.Comment != nil {
+			for _, c := range imp.Comment.List {
+				comments = append(comments, c.Text)
+			}
+		}
 		is = append(is, &models.Import{
-			Name: n,
-			Path: imp.Path.Value,
+			Comments: strings.Join(comments, " "),
+			Name:     n,
+			Path:     imp.Path.Value,
 		})
 	}
 	return is
