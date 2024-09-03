@@ -1,0 +1,44 @@
+name: Go
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-24.04
+
+    strategy:
+      matrix:
+        go:
+          - 1.21.x
+          - 1.22.x
+          - 1.23.x
+
+    steps:
+      # https://github.com/actions/checkout
+      - name: Check out code
+        uses: actions/checkout@v4
+
+      # https://github.com/actions/setup-go
+      - name: Set up Go 1.x
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go }}
+          check-latest: true
+
+      - name: Run Unit tests
+        run: |
+          go test -v -race -count=1 -shuffle=on -run=. -cover -covermode=atomic -coverpkg=./... -coverprofile=coverage.out ./...
+
+      # https://github.com/codecov/codecov-action
+      - name: Upload Coverage report to CodeCov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          file: ./coverage.out
+          disable_file_fixes: true
+          verbose: true
