@@ -5,7 +5,6 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 
 	"github.com/zchee/gotests/internal/models"
@@ -42,10 +41,9 @@ func (o *Options) Process(head *models.Header, funcs []*models.Function) ([]byte
 		o.render.LoadFromData(o.TemplateData)
 	}
 
-	//
-	tf, err := ioutil.TempFile("", "gotests_")
+	tf, err := os.CreateTemp("", "gotests_")
 	if err != nil {
-		return nil, fmt.Errorf("ioutil.TempFile: %v", err)
+		return nil, fmt.Errorf("os.CreateTemp: %v", err)
 	}
 	defer tf.Close()
 	defer os.Remove(tf.Name())

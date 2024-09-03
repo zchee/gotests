@@ -7,7 +7,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"os"
 	"regexp"
 
@@ -77,7 +76,7 @@ func parseOptions(out io.Writer, opt *Options) *gotests.Options {
 	templateParams := map[string]interface{}{}
 	jfile := opt.TemplateParamsPath
 	if jfile != "" {
-		buf, err := ioutil.ReadFile(jfile)
+		buf, err := os.ReadFile(jfile)
 		if err != nil {
 			fmt.Fprintf(out, "Failed to read from %s ,err %s", jfile, err)
 			return nil
@@ -133,7 +132,7 @@ func generateTests(out io.Writer, path string, writeOutput bool, opt *gotests.Op
 
 func outputTest(out io.Writer, t *gotests.GeneratedTest, writeOutput bool) {
 	if writeOutput {
-		if err := ioutil.WriteFile(t.Path, t.Output, newFilePerm); err != nil {
+		if err := os.WriteFile(t.Path, t.Output, newFilePerm); err != nil {
 			fmt.Fprintln(out, err)
 			return
 		}

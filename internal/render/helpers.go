@@ -1,6 +1,6 @@
 package render
 
-//go:generate esc -o bindata/esc.go -pkg=bindata templates
+//go:generate go run github.com/mjibson/esc@master -o bindata/esc.go -pkg=bindata templates
 import (
 	"fmt"
 	"strings"

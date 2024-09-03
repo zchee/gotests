@@ -3,7 +3,7 @@ package render
 import (
 	"fmt"
 	"io"
-	"io/ioutil"
+	"os"
 	"path"
 	"text/template"
 
@@ -37,9 +37,9 @@ func New() *Render {
 
 // LoadCustomTemplates allows to load in custom templates from a specified path.
 func (r *Render) LoadCustomTemplates(dir string) error {
-	files, err := ioutil.ReadDir(dir)
+	files, err := os.ReadDir(dir)
 	if err != nil {
-		return fmt.Errorf("ioutil.ReadDir: %v", err)
+		return fmt.Errorf("os.ReadDir: %v", err)
 	}
 
 	templateFiles := []string{}

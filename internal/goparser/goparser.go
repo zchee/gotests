@@ -9,7 +9,7 @@ import (
 	"go/parser"
 	"go/token"
 	"go/types"
-	"io/ioutil"
+	"os"
 	"strings"
 
 	"github.com/zchee/gotests/internal/models"
@@ -60,9 +60,9 @@ func (p *Parser) Parse(srcPath string, files []models.Path) (*Result, error) {
 }
 
 func (p *Parser) readFile(srcPath string) ([]byte, error) {
-	b, err := ioutil.ReadFile(srcPath)
+	b, err := os.ReadFile(srcPath)
 	if err != nil {
-		return nil, fmt.Errorf("ioutil.ReadFile: %v", err)
+		return nil, fmt.Errorf("os.ReadFile: %v", err)
 	}
 	if len(b) == 0 {
 		return nil, ErrEmptyFile
